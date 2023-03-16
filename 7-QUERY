@@ -1,0 +1,46 @@
+DESC:ATTEMPTED QUESTIONS FOR A QUIZ FOR A PARTICULAR STUDENT
+QUERY:
+SELECT
+    concat( u.firstname, " ", u.lastname ) AS "Student Name",
+    u.id,
+    quiza.userid,
+    q.course,
+    q.name,
+    quiza.attempt,
+    qa.slot,
+    que.questiontext AS 'Question',
+    qa.rightanswer AS 'Correct Answer',
+    qa.responsesummary AS 'Student Answer'
+
+FROM prefix_quiz_attempts quiza
+JOIN prefix_quiz q ON q.id=quiza.quiz
+JOIN prefix_question_usages qu ON qu.id = quiza.uniqueid
+JOIN prefix_question_attempts qa ON qa.questionusageid = qu.id
+JOIN prefix_question que ON que.id = qa.questionid
+JOIN prefix_user u ON u.id = quiza.userid
+
+WHERE q.name = "Assessment"
+AND q.course = "3"
+AND u.username="121910306038"
+AND qa.responsesummary IS NOT NULL
+
+
+
+ORDER BY quiza.userid, quiza.attempt, qa.slot
+
+OUTPUT:
+student name	id	userid	course	Name	attempt	slot	question	correct answer	student answer
+Sohan Patchigolla	5	5	3	Assessment	1	6	Can AutoSave be enabled when you are working with a file that is saved to your computer hard drive?	Depends on the settings	May be
+Sohan Patchigolla	5	5	3	Assessment	1	10	If you make significant changes to a .xlsx file and want to save it as a different version which of the following saving methods would you want to use?	Save As	Save
+Sohan Patchigolla	5	5	3	Assessment	1	11	While browsing photo-stock sites beware of ____	direct images and real life photos	cliches
+Sohan Patchigolla	5	5	3	Assessment	1	13	When designing a process diagram you need to create ______ points	3 to 5	5 to 8
+Sohan Patchigolla	5	5	3	Assessment	1	18	How many percentage of the brain is involved in visual processing (roughly)?	50	50
+Sohan Patchigolla	5	5	3	Assessment	1	19	Too much text"" problem is usually a consequence of	both the options	absence of the hierarchy
+Sohan Patchigolla	5	5	3	Assessment	1	25	What should you do if you receive a chain e-mail that promises you will receive lots of money if you forward it to at least 10 people?	Delete the message as junk mail	Forward the message to your ten best friends
+Sohan Patchigolla	5	5	3	Assessment	1	26	_______, with the description for when you know you made a mistake	I am sorry that	I am sorry about
+Sohan Patchigolla	5	5	3	Assessment	1	31	Microsoft word is ____ software.	Application	System
+Sohan Patchigolla	5	5	3	Assessment	1	33	The intersection of a column and a row in MS Excel worksheet is known as _______	Cell	Tab
+Sohan Patchigolla	5	5	3	Assessment	1	35	During the boot process, the ____________ looks for the system files.	BIOS	DVD
+Sohan Patchigolla	5	5	3	Assessment	1	39	Web site's main page is called its:	Home Page	Browser Page								
+
+									
