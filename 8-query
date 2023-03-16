@@ -1,3 +1,5 @@
+DESC:NON-ATTEMPTED QUESTIONS FOR A QUIZ FOR A PARTICULAR STUDENT
+QUERY:
 SELECT
     concat( u.firstname, " ", u.lastname ) AS "Student Name",
     u.id,
