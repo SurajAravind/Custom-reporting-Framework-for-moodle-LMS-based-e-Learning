@@ -1,0 +1,8 @@
+DESC:GRADE
+one line query basic
+QUERY:
+select * from prefix_grade_items
+OUTPUT:
+id	courseid	categoryid	itemname	                                                 itemtype	grademax	grademin	gradepass
+2	   3	       3	         Introduction to Computers and Office Productivity Software	mod	      5	         0	      0
+3	   3	       3	        Create Informative Presentations with Google Slides	        mod	      5          0        0
