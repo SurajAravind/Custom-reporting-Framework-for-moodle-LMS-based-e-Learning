@@ -1,0 +1,36 @@
+DESC:LAST ACCESSED TO A PARTICULAR COURSE
+
+QUERY:
+SELECT
+user2.id AS ID,
+ul.timeaccess,
+user2.firstname AS Firstname,
+user2.lastname AS Lastname,
+user2.email AS Email,
+user2.username AS IDNumber,
+user2.institution AS Institution,
+
+IF (user2.lastaccess = 0,'never',
+DATE_FORMAT(FROM_UNIXTIME(user2.lastaccess),'%Y-%m-%d')) AS dLastAccess
+
+,(SELECT DATE_FORMAT(FROM_UNIXTIME(timeaccess),'%Y-%m-%d') FROM prefix_user_lastaccess WHERE userid=user2.id AND courseid=c.id) AS CourseLastAccess
+
+,(SELECT r.name
+FROM  prefix_user_enrolments AS uenrol
+JOIN prefix_enrol AS e ON e.id = uenrol.enrolid
+JOIN prefix_role AS r ON e.id = r.id
+WHERE uenrol.userid=user2.id AND e.courseid = c.id) AS RoleName
+
+FROM prefix_user_enrolments AS ue
+JOIN prefix_enrol AS e ON e.id = ue.enrolid
+JOIN prefix_course AS c ON c.id = e.courseid
+JOIN prefix_user AS user2 ON user2 .id = ue.userid
+LEFT JOIN prefix_user_lastaccess AS ul ON ul.userid = user2.id
+WHERE c.id=5 and ue.userid NOT IN (SELECT qa.userid FROM prefix_quiz_attempts AS qa
+JOIN prefix_quiz AS q ON qa.quiz = q.id
+JOIN prefix_course AS c ON q.course = c.id
+WHERE c.id = 5 AND q.name LIKE '%Assessment%')
+
+OUTPUT:
+ID	timeaccess	Firstname	Lastname	Email	            IDNumber	Institution	dLastAccess	CourseLastAccess
+7	  1676540963	  Sai Preeti	G	    sgouripe@gitam.edu	10293	   GITAM	    2023-02-16	    2023-02-16
