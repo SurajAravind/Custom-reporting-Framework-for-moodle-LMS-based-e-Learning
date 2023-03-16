@@ -1,0 +1,84 @@
+DESC:LOGIN IN LOG OUT DEATILS
+This query shows the login and logout history completely for a specific user by changing userid with date and time
+QUERY:
+
+SELECT
+l.id AS "Log_event_id",
+l.timecreated AS "Timestamp",
+DATE_FORMAT(FROM_UNIXTIME(l.timecreated),'%Y-%m-%d %H:%i') AS "Time_UTC",
+l.action,
+u.username,
+l.origin,
+l.ip
+FROM prefix_logstore_standard_log l
+JOIN prefix_user u ON u.id = l.userid
+WHERE l.action IN ('loggedin','loggedout')
+AND l.userid = 2
+ORDER BY l.timecreated
+
+OUTPUT:
+log   event id	   imestamp	 time utc	action username origin
+1	    1675865635	2023-02-08 19:43	loggedin	admin	web
+1190	1675865882	2023-02-08 19:48	loggedout	admin	web
+1197	1675942300	2023-02-09 17:01	loggedin	admin	web
+1203	1675942701	2023-02-09 17:08	loggedin	admin	web
+1207	1675943622	2023-02-09 17:23	loggedout	admin	web
+1225	1675949804	2023-02-09 19:06	loggedout	admin	web
+1229	1676035429	2023-02-10 18:53	loggedin	admin	web
+1345	1676039090	2023-02-10 19:54	loggedout	admin	web
+1354	1676280486	2023-02-13 14:58	loggedin	admin	web
+1355	1676280492	2023-02-13 14:58	loggedin	admin	web
+1367	1676280643	2023-02-13 15:00	loggedout	admin	web
+1411	1676280994	2023-02-13 15:06	loggedin	admin	web
+1503	1676294165	2023-02-13 18:46	loggedin	admin	web
+1505	1676294188	2023-02-13 18:46	loggedout	admin	web
+1510	1676460906	2023-02-15 17:05	loggedin	admin	web
+1539	1676462497	2023-02-15 17:31	loggedout	admin	web
+1541	1676469766	2023-02-15 19:32	loggedin	admin	web
+1549	1676470592	2023-02-15 19:46	loggedout	admin	web
+1553	1676523749	2023-02-16 10:32	loggedin	admin	web
+1627	1676540541	2023-02-16 15:12	loggedout	admin	web
+1646	1676540629	2023-02-16 15:13	loggedin	admin	web
+1665	1676540787	2023-02-16 15:16	loggedout	admin	web
+1683	1676541070	2023-02-16 15:21	loggedin	admin	web
+1850	1676548116	2023-02-16 17:18	loggedout	admin	web
+1876	1676548405	2023-02-16 17:23	loggedin	admin	web
+1885	1676548896	2023-02-16 17:31	loggedout	admin	web
+1894	1676549652	2023-02-16 17:44	loggedin	admin	web
+1909	1676550106	2023-02-16 17:51	loggedout	admin	web
+1919	1676550306	2023-02-16 17:55	loggedin	admin	web
+1931	1676550738	2023-02-16 18:02	loggedout	admin	web
+1952	1676550871	2023-02-16 18:04	loggedin	admin	web
+1965	1676551482	2023-02-16 18:14	loggedout	admin	web
+1993	1676551682	2023-02-16 18:18	loggedin	admin	web
+1996	1676551730	2023-02-16 18:18	loggedout	admin	web
+2026	1676551894	2023-02-16 18:21	loggedin	admin	web
+2029	1676551926	2023-02-16 18:22	loggedout	admin	web
+3216	1676552613	2023-02-16 18:33	loggedin	admin	web
+3220	1676554162	2023-02-16 18:59	loggedout	admin	web
+3227	1676554255	2023-02-16 19:00	loggedin	admin	web
+3230	1676554321	2023-02-16 19:02	loggedout	admin	web
+3733	1676882848	2023-02-20 14:17	loggedin	admin	web
+3785	1676883742	2023-02-20 14:32	loggedin	admin	web
+3828	1677497796	2023-02-27 17:06	loggedin	admin	web
+3906	1677500225	2023-02-27 17:47	loggedin	admin	web
+3919	1677503443	2023-02-27 18:40	loggedout	admin	web
+3923	1678084895	2023-03-06 12:11	loggedin	admin	web
+3962	1678096864	2023-03-06 15:31	loggedin	admin	web
+3968	1678102075	2023-03-06 16:57	loggedout	admin	web
+3983	1678171009	2023-03-07 12:06	loggedin	admin	web
+3986	1678197639	2023-03-07 19:30	loggedout	admin	web
+3990	1678259858	2023-03-08 12:47	loggedin	admin	web
+4026	1678261496	2023-03-08 13:14	loggedout	admin	web
+4053	1678261827	2023-03-08 13:20	loggedin	admin	web
+4073	1678262067	2023-03-08 13:24	loggedout	admin	web
+4092	1678262153	2023-03-08 13:25	loggedin	admin	web
+4097	1678262206	2023-03-08 13:26	loggedout	admin	web
+4110	1678262334	2023-03-08 13:28	loggedin	admin	web
+4115	1678262692	2023-03-08 13:34	loggedout	admin	web
+4136	1678263151	2023-03-08 13:42	loggedin	admin	web
+4140	1678263255	2023-03-08 13:44	loggedout	admin	web
+4157	1678263385	2023-03-08 13:46	loggedin	admin	web
+4160	1678263419	2023-03-08 13:46	loggedout	admin	web
+4199	1678861582	2023-03-15 11:56	loggedin	admin	web
+4204	1678972415	2023-03-16 18:43	loggedin	admin	web
