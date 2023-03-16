@@ -1,0 +1,9 @@
+DESC:This query gives the details of users
+QUERY:
+select * from prefix_user
+OUTPUT:
+id	auth	confirmed	policyagreed	deleted	suspended	mnethostid	username	firstname	lastname	emailstop
+1	manual	   1       	0	            0	         0	   1	         guest	   Guest      user	 	0
+2	manual	   1        0	            0	         0	   1	         admin	   Admin     	User	  0
+
+NOTE:YOU WILL GET MORE PARAMETERS I REMOVED SOME OF THE PARAMETERS BECAUSE OF PRIVACY AND ALSO INCLUDED LESS USERS 
