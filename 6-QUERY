@@ -1,0 +1,29 @@
+DESC:ONLY CORRECT ANSWERS FOR A PARTICULAR STUDENT IN QUIZ
+It search for specific a student  in the course for the quiz and shows what he/she answered and also correct answer by changing particular username in query
+QUERY:
+SELECT
+    concat( u.firstname, " ", u.lastname ) AS "Student Name",
+    u.id,
+    quiza.userid,
+    q.course,
+    q.name,
+    quiza.attempt,
+    qa.slot,
+    que.questiontext AS 'Question',
+    qa.rightanswer AS 'Correct Answer',
+    qa.responsesummary AS 'Student Answer'
+
+FROM prefix_quiz_attempts quiza
+JOIN prefix_quiz q ON q.id=quiza.quiz
+JOIN prefix_question_usages qu ON qu.id = quiza.uniqueid
+JOIN prefix_question_attempts qa ON qa.questionusageid = qu.id
+JOIN prefix_question que ON que.id = qa.questionid
+JOIN prefix_user u ON u.id = quiza.userid
+
+WHERE q.name = "Assessment"
+AND q.course = "3"
+AND u.username="121910306038"
+AND qa.responsesummary=qa.rightanswer
+OUTPUT:
+student name	    id userid	course	Name	   attempt	slot	question	                                                                  correct answer	student answer		
+Sohan Patchigolla	5	  5	      3	  Assessment	1	       18	  How many percentage of the brain is involved in visual processing (roughly)?	50	            50		
